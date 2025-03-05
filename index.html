@@ -3,15 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Barbearia reference </title>
 </head>
 <body>
-    <h1>olaaa</h1>
-    <style>
-        h1{
-            background-color: aqua;
-            color: blue;
+    <div class="register-container">
+        <h2>Cadastro</h2>
+        <form onsubmit="validateForm(event)">
+            <input type="text" class="input-field" placeholder="Nome Completo" required>
+            <input type="email" id="email" class="input-field" placeholder="E-mail" required>
+            <div class="password-container">
+                <input type="password" id="password" class="input-field" placeholder="Senha" required>
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')">👁</button>
+            </div>
+            <div class="password-container">
+                <input type="password" id="confirm-password" class="input-field" placeholder="Confirme a Senha" required>
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirm-password')">👁</button>
+            </div>
+            <button type="submit" class="register-btn">Cadastrar</button>
+        </form>
+        <a href="#" class="login-link">Já tem uma conta? Faça login</a>
+    </div>
+    <script>
+        function validateForm(event) {
+            const emailField = document.getElementById("email");
+            const passwordField = document.getElementById("password");
+            const confirmPasswordField = document.getElementById("confirm-password");
+            const passwordValue = passwordField.value;
+            const confirmPasswordValue = confirmPasswordField.value;
+            
+            if (!emailField.value.includes("@")) {
+                alert("Por favor, insira um e-mail válido contendo '@'.");
+                event.preventDefault();
+                return;
+            }
+            
+            const strongPasswordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!strongPasswordRegex.test(passwordValue)) {
+                alert("A senha deve ter no mínimo 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um caractere especial.");
+                event.preventDefault();
+                return;
+            }
+            
+            if (passwordValue !== confirmPasswordValue) {
+                alert("As senhas devem ser iguais. Por favor, tente novamente.");
+                event.preventDefault();
+                return;
+            }
+            
+            // Redireciona para outra página após validação bem-sucedida
+            window.location.href = "pagina_sucesso.html";
         }
-    </style>
+        
+        function togglePasswordVisibility(id) {
+            const field = document.getElementById(id);
+            field.type = field.type === "password" ? "text" : "password";
+        }
+    </script>
 </body>
 </html>
