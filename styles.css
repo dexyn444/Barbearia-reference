@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url(12_generated.jpg);
+    background-image: radial-gradient(circle, #5c0067 0%, #00d4ff 100%);
 }
 .register-container {
     background: white;
